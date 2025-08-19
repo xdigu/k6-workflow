@@ -10,13 +10,10 @@ runs:
   using: "composite"
 
   steps:
-    - name: Checkout deafult code
-      uses: actions/checkout@v4
-      with:
-          repository: "xdigu/k6-workflow"
-          token: ${{ secrets.CHECKOUT_TOKEN }}
-          path: default
-          ref: "main"
+    - name: list dir
+      shell: bash
+      run: |
+        ls -lah
 
     - name: Checkout code
       uses: actions/checkout@v4
@@ -30,8 +27,8 @@ runs:
       uses: grafana/run-k6-action@v1
       with:
         path: |
-          ./default/k6/*.k6.js
+          ./default-k6/*.k6.js
           ./k6/*.k6.js
           ./k6/*.k6.ts
       env:
-          BASE_URL: ${{ inputs.base_url }}
+        BASE_URL: ${{ inputs.base_url }}
