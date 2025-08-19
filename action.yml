@@ -22,5 +22,7 @@ runs:
       uses: grafana/run-k6-action@v1
       with:
         path: |
-          ./k6/*.test.js
-          ./k6/*.test.ts
+          ./k6/*.k6.js
+          ./k6/*.k6.ts
+      env:
+          BASE_URL: ${{ inputs.base_url }}
