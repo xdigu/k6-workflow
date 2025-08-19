@@ -14,6 +14,7 @@ runs:
       uses: actions/checkout@v4
       with:
           repository: "xdigu/k6-workflow"
+          token: ${{ secrets.CHECKOUT_TOKEN }}
           path: default
           ref: "main"
 
