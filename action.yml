@@ -13,7 +13,7 @@ runs:
     - name: list dir
       shell: bash
       run: |
-        ls -lah
+        ls -lah ${{ github.action_path }}
 
     - name: Checkout code
       uses: actions/checkout@v4
@@ -27,7 +27,7 @@ runs:
       uses: grafana/run-k6-action@v1
       with:
         path: |
-          ./default-k6/*.k6.js
+          ./k6/*.k6.js
           ./k6/*.k6.js
           ./k6/*.k6.ts
       env:
