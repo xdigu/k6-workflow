@@ -1,0 +1,26 @@
+name: "Run k6s"
+description: "k6s automation run."
+
+inputs:
+  base_url:
+    description: "base url"
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup K6
+      uses: grafana/setup-k6-action@v1
+      with:
+        k6-version: "1.2.1"
+
+    - name: Run local k6 test
+      uses: grafana/run-k6-action@v1
+      with:
+        path: |
+          ./k6/*.test.js
+          ./k6/*.test.ts
