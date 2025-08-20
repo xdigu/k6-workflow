@@ -28,11 +28,11 @@ runs:
       id: parse_path
       run: ${{ github.action_path }}/parse_script_paths.sh
       env:
+        SHOULD_RUN_DEFAULT: ${{ inputs.should_run_default == 'true' }}
         DEFAULT_PATH: ${{ github.action_path }}/k6/**/*.k6.js
         SCRIPTS: ./k6/**/*.k6.js
 
     - name: Run k6 test
-      if: ${{ inputs.should_run_default == 'true' }}
       uses: grafana/run-k6-action@v1
       with:
         path: |
