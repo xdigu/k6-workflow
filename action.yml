@@ -32,6 +32,9 @@ runs:
         DEFAULT_PATH: ${{ github.action_path }}/k6/**/*.k6.js
         SCRIPTS: ./k6/**/*.k6.js
 
+    - shell: bash
+      run: echo "${{ steps.parse_path.outputs.path }}"
+
     - name: Run k6 test
       uses: grafana/run-k6-action@v1
       with:
