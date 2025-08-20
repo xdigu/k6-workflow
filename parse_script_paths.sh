@@ -7,4 +7,4 @@ else
   OUTPUT="$SCRIPTS"
 fi
 
-echo "path=$my_value" >> "$GITHUB_OUTPUT"
+echo "path=$OUTPUT" >> "$GITHUB_OUTPUT"
