@@ -6,6 +6,11 @@ inputs:
     description: "base url"
     required: true
 
+  should_run_default:
+    description: "should run default scripts"
+    default: "false"
+    required: false
+
 runs:
   using: "composite"
 
@@ -18,11 +23,19 @@ runs:
       with:
         k6-version: "1.2.1"
 
-    - name: Run local k6 test
+    - name: Run dafault k6 test
+      if: ${{ inputs.should_run_default == "true" }}
       uses: grafana/run-k6-action@v1
       with:
         path: |
           ${{ github.action_path }}/k6/**/*.k6.js
+      env:
+        BASE_URL: ${{ inputs.base_url }}
+
+    - name: Run local k6 tests
+      uses: grafana/run-k6-action@v1
+      with:
+        path: |
           ./k6/**/*.k6.js
       env:
         BASE_URL: ${{ inputs.base_url }}
