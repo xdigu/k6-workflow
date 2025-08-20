@@ -24,7 +24,7 @@ runs:
         k6-version: "1.2.1"
 
     - name: Run dafault k6 test
-      if: ${{ inputs.should_run_default == "true" }}
+      if: ${{ inputs.should_run_default == 'true' }}
       uses: grafana/run-k6-action@v1
       with:
         path: |
