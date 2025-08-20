@@ -23,19 +23,19 @@ runs:
       with:
         k6-version: "1.2.1"
 
-    - name: Run dafault k6 test
+    - name: Parse path
+      shell: bash
+      id: parse_path
+      run: ${{ github.action_path }}/parse_script_paths.sh
+      env:
+        DEFAULT_PATH: ${{ github.action_path }}/k6/**/*.k6.js
+        SCRIPTS: ./k6/**/*.k6.js
+
+    - name: Run k6 test
       if: ${{ inputs.should_run_default == 'true' }}
       uses: grafana/run-k6-action@v1
       with:
         path: |
-          ${{ github.action_path }}/k6/**/*.k6.js
-      env:
-        BASE_URL: ${{ inputs.base_url }}
-
-    - name: Run local k6 tests
-      uses: grafana/run-k6-action@v1
-      with:
-        path: |
-          ./k6/**/*.k6.js
+          ${{ steps.parse_path.outputs.path }}
       env:
         BASE_URL: ${{ inputs.base_url }}
