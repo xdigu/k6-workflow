@@ -26,6 +26,11 @@ runs:
     - name: Setup node
       uses: actions/setup-node@v4
 
+    - name: Setup reports dir
+      shell: bash
+      run: |
+        mkdir -p ./{reports,output-report}
+
     - name: Run default k6 test
       if: ${{ inputs.should_run_default == 'true' }}
       uses: grafana/run-k6-action@v1
