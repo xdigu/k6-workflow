@@ -45,12 +45,22 @@ runs:
         BASE_URL: ${{ inputs.base_url }}
         REPORTS_PATH: ./reports
 
+    - name: List reports dir
+      shell: bash
+      run: |
+        ls -la ./reports
+
     - name: Merge results and generate report
       shell: bash
       run: node ${{ github.action_path }}/reports/index.js
       env:
         REPORTS_PATH: ./reports
         EXPORT_REPORT_PATH: ./output-report
+
+    - name: List output report dir
+      shell: bash
+      run: |
+        ls -la ./output-report
 
     - name: Upload report to artifact
       uses: actions/upload-pages-artifact@v3
