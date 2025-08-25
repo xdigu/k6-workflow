@@ -14,7 +14,7 @@ function validateIfFileIsReport(fielName) {
 }
 
 function openFile(fileName) {
-  const data = readFileSync(fileName).toString()
+  const data = readFileSync(`${REPORTS_PATH}/${fileName}`).toString()
   const parsedData = JSON.parse(data)
 
   return parsedData
@@ -94,93 +94,93 @@ function mergeReports(lastReport, currentReport) {
 
   newMetrics.http_req_blocked.values = mergeTrendTime(
     lasteReportMetrics.http_req_blocked.values,
-    currentReportMetrics.http_req_blocked.values,
+    currentReportMetrics.http_req_blocked.values
   )
 
   newMetrics.http_req_connecting.values = mergeTrendTime(
     lasteReportMetrics.http_req_connecting.values,
-    currentReportMetrics.http_req_connecting.values,
+    currentReportMetrics.http_req_connecting.values
   )
 
   newMetrics.group_duration.values = mergeTrendTime(
     lasteReportMetrics.group_duration.values,
-    currentReportMetrics.group_duration.values,
+    currentReportMetrics.group_duration.values
   )
 
   newMetrics.http_req_failed.values = mergeDefaultRate(
     lasteReportMetrics.http_req_failed.values,
-    currentReportMetrics.http_req_failed.values,
+    currentReportMetrics.http_req_failed.values
   )
 
   newMetrics.data_sent.values = mergeCounterData(
     lasteReportMetrics.data_sent.values,
-    currentReportMetrics.data_sent.values,
+    currentReportMetrics.data_sent.values
   )
 
   newMetrics.iteration_duration.values = mergeTrendTime(
     lasteReportMetrics.iteration_duration.values,
-    currentReportMetrics.iteration_duration.values,
+    currentReportMetrics.iteration_duration.values
   )
 
   newMetrics.iterations.values = mergeCounterData(
     lasteReportMetrics.iterations.values,
-    currentReportMetrics.iterations.values,
+    currentReportMetrics.iterations.values
   )
 
   newMetrics.vus.values = mergeGaugeDefault(
     lasteReportMetrics.vus.values,
-    currentReportMetrics.vus.values,
+    currentReportMetrics.vus.values
   )
 
   newMetrics.http_req_duration.values = mergeTrendTime(
     lasteReportMetrics.http_req_duration.values,
-    currentReportMetrics.http_req_duration.values,
+    currentReportMetrics.http_req_duration.values
   )
 
   newMetrics.http_req_waiting.values = mergeTrendTime(
     lasteReportMetrics.http_req_waiting.values,
-    currentReportMetrics.http_req_waiting.values,
+    currentReportMetrics.http_req_waiting.values
   )
 
   newMetrics.vus_max.values = mergeGaugeDefault(
     lasteReportMetrics.vus_max.values,
-    currentReportMetrics.vus_max.values,
+    currentReportMetrics.vus_max.values
   )
 
   newMetrics.http_req_receiving.values = mergeTrendTime(
     lasteReportMetrics.http_req_receiving.values,
-    currentReportMetrics.http_req_receiving.values,
+    currentReportMetrics.http_req_receiving.values
   )
 
   newMetrics["http_req_duration{expected_response:true}"].values =
     mergeTrendTime(
       lasteReportMetrics["http_req_duration{expected_response:true}"].values,
-      currentReportMetrics["http_req_duration{expected_response:true}"].values,
+      currentReportMetrics["http_req_duration{expected_response:true}"].values
     )
 
   newMetrics.data_received.values = mergeCounterData(
     lasteReportMetrics.data_received.values,
-    currentReportMetrics.data_received.values,
+    currentReportMetrics.data_received.values
   )
 
   newMetrics.http_reqs.values = mergeCounterData(
     lasteReportMetrics.http_reqs.values,
-    currentReportMetrics.http_reqs.values,
+    currentReportMetrics.http_reqs.values
   )
 
   newMetrics.checks.values = mergeDefaultRate(
     lasteReportMetrics.checks.values,
-    currentReportMetrics.checks.values,
+    currentReportMetrics.checks.values
   )
 
   newMetrics.http_req_sending.values = mergeTrendTime(
     lasteReportMetrics.http_req_sending.values,
-    currentReportMetrics.http_req_sending.values,
+    currentReportMetrics.http_req_sending.values
   )
 
   newMetrics.http_req_tls_handshaking.values = mergeTrendTime(
     lasteReportMetrics.http_req_tls_handshaking.values,
-    currentReportMetrics.http_req_tls_handshaking.values,
+    currentReportMetrics.http_req_tls_handshaking.values
   )
 
   newReport.metrics = newMetrics
