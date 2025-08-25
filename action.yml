@@ -23,6 +23,9 @@ runs:
       with:
         k6-version: "1.2.1"
 
+    - name: Setup node
+      uses: actions/setup-node@v4
+
     - name: Run default k6 test
       if: ${{ inputs.should_run_default == 'true' }}
       uses: grafana/run-k6-action@v1
@@ -31,6 +34,7 @@ runs:
           ${{ github.action_path }}/k6/**/*.k6.js
       env:
         BASE_URL: ${{ inputs.base_url }}
+        REPORTS_PATH: ./reports
 
     - name: Run k6 test
       uses: grafana/run-k6-action@v1
@@ -39,3 +43,23 @@ runs:
           ./k6/**/*.k6.js
       env:
         BASE_URL: ${{ inputs.base_url }}
+        REPORTS_PATH: ./reports
+
+    - name: Merge results and generate report
+      shell: bash
+      run: node ${{ github.action_path }}/reports/index.js
+      env:
+        REPORTS_PATH: ./reports
+        EXPORT_REPORT_PATH: ./output-report
+
+    - name: Upload report to artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: k6-results
+        path: output-report
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      with:
+        artifact_name: k6-results

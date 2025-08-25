@@ -1,23 +1,24 @@
-import http from "k6/http";
-import { check } from "k6";
+import { group } from "k6"
 
-import URLS from './urls.js'
+import URLS from "./utils/urls.js"
+import { stages } from "./config/stages.js"
+import { Request } from "./utils/request.js"
+import Report from "./utils/report.js"
+
+const request = new Request()
 
 export const options = {
-    stages: [
-        // Ramp-up from 1 to 30 VUs in 30s
-        { duration: "30s", target: 30 },
+  stages,
+}
 
-        // Stay on 30 VUs for 60s
-        { duration: "60s", target: 30 },
+export default function () {
+  group("default", function () {
+    request.get(URLS.checkoutUrl, "checkout")
+  })
+}
 
-        // Ramp-down from 30 to 0 VUs in 10s
-        { duration: "30s", target: 0 }
-    ]
-};
-
-export default function() {
-    const res = http.get(URLS.checkoutUrl);
-
-    check(res, { "status is 200": (r) => r.status === 200 });
+export function handleSummary(data) {
+  return {
+    [Report.fileName]: JSON.stringify(data),
+  }
 }
