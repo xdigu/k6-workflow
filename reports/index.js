@@ -196,5 +196,5 @@ function mergeReports(lastReport, currentReport) {
 
   const mergedReports = reportsFileName.map(openFile).reduce(mergeReports, null)
 
-  writeFileSync(`${EXPORT_REPORT_PATH}/dashboard.html`, htmlReport(mergedReports))
+  writeFileSync(`${EXPORT_REPORT_PATH}/index.html`, htmlReport(mergedReports))
 })()
