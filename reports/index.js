@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, writeFileSync } from "fs"
+import { readdirSync, writeFileSync } from "fs"
 
 const REPORTS_PATH = process.env.REPORTS_PATH
 const EXPORT_REPORT_PATH = process.env.EXPORT_REPORT_PATH
