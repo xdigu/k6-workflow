@@ -50,11 +50,6 @@ runs:
         BASE_URL: ${{ inputs.base_url }}
         REPORTS_PATH: ./reports
 
-    - name: List reports dir
-      shell: bash
-      run: |
-        ls -la ./reports
-
     - name: Merge results and generate report
       shell: bash
       run: node ${{ github.action_path }}/reports/index.js
@@ -62,10 +57,10 @@ runs:
         REPORTS_PATH: ./reports
         EXPORT_REPORT_PATH: ./output-report
 
-    - name: List output report dir
+    - name: Move reports to output folder
       shell: bash
       run: |
-        ls -la ./output-report
+        mv ./reports/* ./output-report
 
     - name: Upload report to artifact
       uses: actions/upload-pages-artifact@v3
