@@ -11,6 +11,14 @@ function validateIfFileIsReport(fielName) {
   return isReport
 }
 
+function parseReportName(fileName) {
+  const regex = /report-(.*).html/gm
+
+  const [_, reportName] = regex.exec(fileName)
+
+  return reportName
+}
+
 function htmlReport(fileNames) {
   const html = `
 <!DOCTYPE html>
@@ -102,7 +110,7 @@ function htmlReport(fileNames) {
           .map(
             (item, index) => `
           <tr>
-            <td>Test Run #${index + 1}</td>
+            <td>Test Run ${parseReportName(item)} #${index + 1}</td>
             <td><a class="report-link" href="${item}" target="_blank">View Report</a></td>
           </tr>
         `
