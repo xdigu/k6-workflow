@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: k6-workflow
+  annotations:
+    github.com/project-slug: xdigu/k6-workflow
+spec:
+  type: other
+  lifecycle: unknown
